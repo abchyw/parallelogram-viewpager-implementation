@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.example.labatory"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:clipChildren="false"
+    tools:context=".ParallelogramPageFragment" >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <com.even.graphiclab.parallelogram.ParallelogramView
+        android:id="@+id/parallelogram_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        app:exampleColor="#33b5e5"
+        app:exampleString="Hello, SquareImageView" />
+
+</FrameLayout>

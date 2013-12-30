@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Labatory</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pager_main">PagerMainActivity</string>
+    <string name="title_activity_action_bar">ActionBarActivity</string>
+    <string name="simple_introduction">hello, this is a dummy app example faking the ui effect of the FIFA app. it is yet far from complete. I will try my best to make into a library easy to integrate in the coming weeks</string>
+    <string name="title_activity_scroll">ScrollActivity</string>
+
+</resources>
