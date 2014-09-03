@@ -20,6 +20,12 @@ import com.even.graphiclab.parallelogram.ParallelogramPageFragment;
 import com.even.graphiclab.parallelogram.ScriptC_dim;
 import com.example.labatory.R;
 
+/**
+ * a simple implementation of ParallelogramPageFragment
+ * 
+ * @author hyw
+ * 
+ */
 public class DummyFragment extends ParallelogramPageFragment {
 	private static final String TAG = DummyFragment.class.getSimpleName();
 
@@ -32,6 +38,7 @@ public class DummyFragment extends ParallelogramPageFragment {
 	private Allocation output;
 	private Allocation input;
 	private ScriptIntrinsicBlur script;
+	// script to dim image
 	private ScriptC_dim script2;
 	private Callback mCallback;
 
@@ -96,7 +103,8 @@ public class DummyFragment extends ParallelogramPageFragment {
 		script2.set_rate(1.f - (0.25f * fraction));
 		// script.forEach(output);
 		// output.copyTo(b);
-		// when the script group is executed the first time, the output bitmap will be a entire white bitmap.
+		// when the script group is executed the first time, the output bitmap
+		// will be a entire white bitmap.
 		group.execute();
 		if (fraction != 0) {
 			output.copyTo(b);
@@ -108,7 +116,9 @@ public class DummyFragment extends ParallelogramPageFragment {
 		if (rs == null) {
 			rs = RenderScript.create(getActivity());
 			if (input == null) {
-				input = Allocation.createFromBitmap(rs, ori, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
+				input = Allocation.createFromBitmap(rs, ori,
+						Allocation.MipmapControl.MIPMAP_NONE,
+						Allocation.USAGE_SCRIPT);
 			}
 			if (output == null) {
 				output = Allocation.createTyped(rs, input.getType());
@@ -125,7 +135,8 @@ public class DummyFragment extends ParallelogramPageFragment {
 				ScriptGroup.Builder builder = new ScriptGroup.Builder(rs);
 				builder.addKernel(script2.getKernelID_invert());
 				builder.addKernel(script.getKernelID());
-				builder.addConnection(input.getType(), script2.getKernelID_invert(), script.getFieldID_Input());
+				builder.addConnection(input.getType(),
+						script2.getKernelID_invert(), script.getFieldID_Input());
 				group = builder.create();
 				group.setInput(script2.getKernelID_invert(), input);
 				group.setOutput(script.getKernelID(), output);

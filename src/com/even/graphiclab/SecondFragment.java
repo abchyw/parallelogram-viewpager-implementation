@@ -13,18 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Use the
- * {@link SecondFragment#newInstance} factory method to create an instance of
- * this fragment.
+ * a dummy fragment displaying a dummy button and a textview.
  * 
  */
 public class SecondFragment extends Fragment {
-	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
 	private static final String ARG_PARAM2 = "param2";
 
-	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
 
@@ -65,18 +61,9 @@ public class SecondFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		View root = inflater.inflate(R.layout.fragment_second, container, false);
+		View root = inflater
+				.inflate(R.layout.fragment_second, container, false);
 		root.setAlpha(0);
-		// Button b = (Button) root.findViewById(R.id.call_btn);
-		// b.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(View v) {
-		// Intent intent = new Intent();
-		// intent.setAction(Intent.ACTION_CALL);
-		// intent.setData(Uri.parse("tel:" + "111"));
-		// startActivity(intent);
-		// }
-		// });
 		return root;
 	}
 

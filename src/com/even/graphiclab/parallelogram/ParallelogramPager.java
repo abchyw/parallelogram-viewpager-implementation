@@ -11,6 +11,12 @@ import android.view.ViewGroup;
 
 import com.example.labatory.R;
 
+/**
+ * view pager where all the transformation work is invoked.
+ * 
+ * @author hyw
+ * 
+ */
 public class ParallelogramPager extends ViewPager {
 	private static final float SCALE = ParallelogramView.getScale() + .03f;
 	private FragmentActivity mActivity;
@@ -37,7 +43,8 @@ public class ParallelogramPager extends ViewPager {
 		@Override
 		public void transformPage(View v, float postion) {
 			int pageWidth = v.getWidth();
-			ParallelogramView pv = (ParallelogramView) ((ViewGroup) v).getChildAt(0);
+			ParallelogramView pv = (ParallelogramView) ((ViewGroup) v)
+					.getChildAt(0);
 
 			v.setScaleX(SCALE);
 			v.setScaleY(SCALE);
@@ -101,17 +108,21 @@ public class ParallelogramPager extends ViewPager {
 
 				// transformation
 				for (int i = 0; i < count; i++) {
-					// ParallelogramPageFragment f = (ParallelogramPageFragment) mActivity.getSupportFragmentManager().findFragmentByTag(
+					// ParallelogramPageFragment f = (ParallelogramPageFragment)
+					// mActivity.getSupportFragmentManager().findFragmentByTag(
 					// "android:switcher:" + R.id.pager + ":" + i);
-					ParallelogramPageFragment f = (ParallelogramPageFragment) ((ParallelogramePagerAdapter) getAdapter()).getFragment(i);
+					ParallelogramPageFragment f = (ParallelogramPageFragment) ((ParallelogramePagerAdapter) getAdapter())
+							.getFragment(i);
 
 					if (f != null && f.isTransformed()) {
 						f.reverseTransform();
 					}
 				}
 				// trick to obtain the current fragment
-				ParallelogramPageFragment f = (ParallelogramPageFragment) mActivity.getSupportFragmentManager().findFragmentByTag(
-						"android:switcher:" + R.id.pager + ":" + position);
+				ParallelogramPageFragment f = (ParallelogramPageFragment) mActivity
+						.getSupportFragmentManager().findFragmentByTag(
+								"android:switcher:" + R.id.pager + ":"
+										+ position);
 				Log.d("onPageChange", "current item: " + position);
 				if (f != null) {
 					f.transform();

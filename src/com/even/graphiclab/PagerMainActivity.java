@@ -24,12 +24,18 @@ import com.even.graphiclab.parallelogram.ParallelogramePagerAdapter;
 import com.even.graphiclab.parallelogram.ParentViewPager;
 import com.example.labatory.R;
 
+/**
+ * sample activity using the ParallelogramView
+ * 
+ * @author hyw
+ * 
+ */
 public class PagerMainActivity extends FragmentActivity implements Callback {
 	protected static final ParallelogramView v = null;
 	protected static final String TAG = PagerMainActivity.class.getSimpleName();
-	int imgArr[] = { R.drawable.a1, R.drawable.a2, R.drawable.a3, R.drawable.a4, R.drawable.a5 };
+	int imgArr[] = { R.drawable.a1, R.drawable.a2, R.drawable.a3,
+			R.drawable.a4, R.drawable.a5 };
 
-	// the background ViewPager
 	private ViewPager mBgPager;
 	private FragmentPagerAdapter mAdapter;
 
@@ -46,6 +52,7 @@ public class PagerMainActivity extends FragmentActivity implements Callback {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pager_main);
 
+		// a view pager displaying dummy button and text
 		final ParentViewPager v = (ParentViewPager) findViewById(R.id.pager2);
 		v.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 			@Override
@@ -61,10 +68,12 @@ public class PagerMainActivity extends FragmentActivity implements Callback {
 			}
 		});
 
+		// view pager displaying background images
 		mBgPager = (ViewPager) findViewById(R.id.pager);
 
 		v.setChildPager(mBgPager);
-		mAdapter = new ParallelogramePagerAdapter(getSupportFragmentManager(), imgArr);
+		mAdapter = new ParallelogramePagerAdapter(getSupportFragmentManager(),
+				imgArr);
 		mBgPager.setAdapter(mAdapter);
 
 		v.setOnPageChangeListener(new OnPageChangeListener() {
@@ -79,7 +88,8 @@ public class PagerMainActivity extends FragmentActivity implements Callback {
 
 			@Override
 			public void onPageScrollStateChanged(int state) {
-				if (state == ViewPager.SCROLL_STATE_IDLE && mLastCurrent != v.getCurrentItem()) {
+				if (state == ViewPager.SCROLL_STATE_IDLE
+						&& mLastCurrent != v.getCurrentItem()) {
 					for (Fragment f : mFragMap.values()) {
 						ViewGroup content = (ViewGroup) f.getView();
 						if (content != null) {

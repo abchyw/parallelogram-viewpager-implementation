@@ -36,12 +36,6 @@ public abstract class ParallelogramPageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		// View root = inflater.inflate(getLayoutId(), container, false);
-		// mParallelogramView = (ParallelogramView) root.findViewById(R.id.parallelogram_view);
-		// if (mParallelogramView == null) {
-		// throw new IllegalStateException("ParallelogramPageFragment needs a ParallelogramView whose id is R.id.parallelogram_view in its layout");
-		// }
-
 		mParallelogramView = new ParallelogramView(getActivity());
 		mParallelogramView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 		mParallelogramView.setTransformer(mTransformProxy);

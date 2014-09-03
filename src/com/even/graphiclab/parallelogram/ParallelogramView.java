@@ -21,7 +21,7 @@ import android.view.ViewTreeObserver.OnPreDrawListener;
 import com.example.labatory.R;
 
 /**
- * TODO: document your custom view class. assume that the view fills up the whole screen.
+ * a parallelogram-shaped view
  */
 public class ParallelogramView extends View {
 	private static final String TAG = ParallelogramView.class.getSimpleName();
@@ -82,7 +82,8 @@ public class ParallelogramView extends View {
 
 	private void init(AttributeSet attrs, int defStyle) {
 		// Load attributes
-		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ParallelogramView, defStyle, 0);
+		final TypedArray a = getContext().obtainStyledAttributes(attrs,
+				R.styleable.ParallelogramView, defStyle, 0);
 
 		a.recycle();
 
@@ -147,16 +148,14 @@ public class ParallelogramView extends View {
 		mPath.lineTo(x0 + width, y0);
 		mPath.lineTo(startX, startY);
 
-		// RectShape s = new RectShape();
-		// s.resize(width, height);
-		// mDrawable = new ShapeDrawable(s);
 		mShape.resize(width, height);
 
 		int dx = mWidth / 2 - (x0 + x0 + width) / 2;
 		int dy = mHeight / 2 - (y0 + y0 + height) / 2;
 
 		mDrawable.setShape(new PathShape(mPath, width, height));
-		mDrawable.setBounds(x0 + dx, y0 + dy, x0 + width + dx, y0 + height + dy);
+		mDrawable
+				.setBounds(x0 + dx, y0 + dy, x0 + width + dx, y0 + height + dy);
 	}
 
 	public void reShape() {
@@ -166,8 +165,6 @@ public class ParallelogramView extends View {
 		int width = (int) ((mWidth + mHeight * Math.tan(Math.toRadians(angle))) / SCALE);
 		int height = (int) (width * ratio);
 		int gap = (int) (height * (Math.tan(Math.toRadians(angle))));
-		// int width = img.getMeasuredWidth();
-		// int height = img.getMeasuredHeight();
 		int x0 = 0;
 		int y0 = 0;
 		int startX, startY, oppX, oppY;
@@ -191,19 +188,22 @@ public class ParallelogramView extends View {
 		int dy = mHeight / 2 - (y0 + y0 + height) / 2;
 
 		mDrawable.setShape(new PathShape(mPath, width, height));
-		mDrawable.setBounds(x0 + dx, y0 + dy, x0 + width + dx, y0 + height + dy);
+		mDrawable
+				.setBounds(x0 + dx, y0 + dy, x0 + width + dx, y0 + height + dy);
 
 		invalidate();
 	}
 
 	private void setupShader() {
-		Shader fillShader = new BitmapShader(bmpToDraw, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+		Shader fillShader = new BitmapShader(bmpToDraw, Shader.TileMode.REPEAT,
+				Shader.TileMode.REPEAT);
 		fillShader.setLocalMatrix(mDrawableMatrix);
 		mDrawable.getPaint().setShader(fillShader);
 	}
 
 	/**
-	 * get a copy of the original bitmap. the copy one will be drawn on the canvas.
+	 * get a copy of the original bitmap. the copy one will be drawn on the
+	 * canvas.
 	 */
 	private void copyBitmap() {
 		bmpToDraw = bmpOri.copy(bmpOri.getConfig(), true);
@@ -224,23 +224,18 @@ public class ParallelogramView extends View {
 		mDrawableMatrix.setTranslate(bgTranslateX, dy);
 		mDrawable.getPaint().getShader().setLocalMatrix(mDrawableMatrix);
 
-		// renderscript version
-		// input.copyFrom(bmpOri);
-		// mKernel.set_d((int) dx/2);
-		// mKernel.set_gIn(input);
-		// mKernel.forEach_invert(input, output);
-		// output.copyTo(bmpToDraw);
-
 		invalidate();
 	}
 
 	/**
-	 * fires the image transformation. the @ImageTransformer updateImageInTransformation() method will be called;
+	 * fires the image transformation. the @ImageTransformer
+	 * updateImageInTransformation() method will be called;
 	 */
 	public void executeImageTransformation() {
 		if (mTransformer != null) {
 			mTransformer.updateImageInTransformation(bmpToDraw);
-			BitmapShader shader = new BitmapShader(bmpToDraw, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+			BitmapShader shader = new BitmapShader(bmpToDraw,
+					Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 			shader.setLocalMatrix(mDrawableMatrix);
 			mDrawable.getPaint().setShader(shader);
 			invalidate();
@@ -262,10 +257,12 @@ public class ParallelogramView extends View {
 			bmpToDraw.recycle();
 		}
 		bmpOri = bmp;
-		// //////
-		bmpOri = bmpOri.createScaledBitmap(bmpOri, (int) (bmpOri.getWidth() / 2.2), (int) (bmpOri.getHeight() / 2.2), false);
+		bmpOri = bmpOri.createScaledBitmap(bmpOri,
+				(int) (bmpOri.getWidth() / 2.2),
+				(int) (bmpOri.getHeight() / 2.2), false);
 
-		// Log.d(TAG, "width: "+bmpOri.getWidth() + " height: "+bmpOri.getHeight());
+		// Log.d(TAG, "width: "+bmpOri.getWidth() +
+		// " height: "+bmpOri.getHeight());
 
 		copyBitmap();
 
@@ -275,12 +272,6 @@ public class ParallelogramView extends View {
 
 		// set up the shader
 		setupShader();
-		// //////////
-
-		// mScript = RenderScript.create(getContext());
-		// input = Allocation.createFromBitmap(mScript, bmpOri);
-		// output = Allocation.createFromBitmap(mScript, bmpToDraw);
-		// mKernel = new ScriptC_translate(mScript, getResources(), R.raw.translate);
 
 		// remember we need to initialize the path before drawing.
 		getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListener);
@@ -304,7 +295,8 @@ public class ParallelogramView extends View {
 			bmpToDraw.recycle();
 		}
 		copyBitmap();
-		BitmapShader shader = new BitmapShader(bmpToDraw, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+		BitmapShader shader = new BitmapShader(bmpToDraw,
+				Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 		shader.setLocalMatrix(mDrawableMatrix);
 		mDrawable.getPaint().setShader(shader);
 		invalidate();
@@ -338,7 +330,8 @@ public class ParallelogramView extends View {
 		void updateImageInTransformation(Bitmap b);
 
 		/**
-		 * initialization work. Stuff like initializing the Renderscript should take place here.
+		 * initialization work. Stuff like initializing the Renderscript should
+		 * take place here.
 		 * 
 		 * @param ori
 		 *            the original Bitmap of the ParallelogramView
